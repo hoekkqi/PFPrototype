@@ -1,0 +1,50 @@
+plugins {
+    id 'org.springframework.boot' version '2.3.2.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'java'
+}
+
+group 'com.github.lumunix'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    useJUnitPlatform()
+}
+
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+}
+
+bootBuildImage {
+    imageName = "lumunix/fursona"
+}
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation group: 'org.webjars', name: 'webjars-locator', version: '0.40'
+    implementation group: 'org.webjars', name: 'bootstrap', version: '4.5.3'
+    implementation group: 'org.webjars', name: 'd3js', version: '6.2.0'
+
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.security:spring-security-test'
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.4.0'
+
+
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.16'
+    implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.16'
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    testImplementation group: 'de.flapdoodle.embed', name: 'de.flapdoodle.embed.mongo', version: '2.2.0'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
